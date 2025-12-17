@@ -1,70 +1,60 @@
 # Voice-Based Hotel Assistant
 
-This is a browser-based voice assistant designed for hotel guests.  
-Users can speak naturally, and the assistant responds with helpful, predefined answers related to hotel services.
+This project is a browser-based voice assistant for hotel guests.  
+Users can speak naturally, and the assistant responds with predefined, helpful answers related to hotel services.
 
-The project focuses on clean UI, smooth voice interaction, and simple rule-based logic — no AI APIs or backend required.
+The entire system runs on the frontend using browser capabilities — no backend or AI APIs are used.
 
-## What this assistant can do
+## Features
 
-- Listen to the user’s voice using the browser microphone
-- Convert speech to text (STT)
-- Match the user’s query against predefined rules (keywords → intent)
-- Respond with a relevant answer
-- Speak the response back using text-to-speech (TTS)
-- Store chat history locally so it persists after refresh
-- Allow users to clear the conversation at any time
+- Speech-to-Text (STT) using the Web Speech API
+- Text-to-Speech (TTS) with tuned, natural-sounding voices
+- Rule-based query understanding (keyword matching)
+- Persistent chat history using localStorage
 
-## Example things you can say
+## How Speech-to-Text (STT) Works
 
-- “I want to order food”
-- “Can I get some water?”
-- “What’s the WiFi password?”
-- “I need housekeeping”
-- “Where is the hotel located?”
-- “Thank you” or “Bye”
+The assistant uses the browser’s `SpeechRecognition` API to capture voice input.
+When the microphone button is pressed:
+- The browser listens to the user’s speech
+- Speech is converted into text
+- The text is stored in state and treated as a user message
 
-If the assistant doesn’t understand, it politely asks the user to rephrase.
+This allows real-time voice interaction without any server-side processing.
 
-## Tech used
+## How Text-to-Speech (TTS) Works
 
-- React
-- Web Speech API (SpeechRecognition + SpeechSynthesis)
-- Tailwind CSS
-- LocalStorage for chat persistence
+Assistant responses are spoken using the `SpeechSynthesis` API.
+- A natural voice is selected from available system voices
+- Speech rate, pitch, and volume are tuned to sound less robotic
+- Any ongoing speech is cancelled before a new response is spoken
 
-Everything runs fully in the browser.
+The spoken response always matches the message shown in the chat.
 
-## How it works (high level)
+## Query Matching Logic
 
-1. User speaks using the microphone button  
-2. Speech is converted to text  
-3. Text is matched against rule-based intents  
-4. A predefined response is selected  
-5. The response is shown in the chat and spoken aloud  
+The assistant uses a rule-based approach to understand queries:
+- User input is normalized (lowercased)
+- Each message is checked against predefined rules
+- Each rule contains keywords and a fixed response
+- If a keyword is found, the corresponding response is returned
+- If no rule matches, a fallback message asks the user to rephrase
 
-## Why rule-based?
+This makes the assistant fast, predictable, and easy to extend.
 
-This project intentionally avoids AI models to:
-- Keep the system predictable
-- Make behavior easy to explain in interviews
-- Ensure fast and offline-friendly responses
-- Focus on UI/UX and system design fundamentals
+## Limitations
 
-## Notes
+- Speech recognition depends on browser support (best on Chrome/Edge)
+- Continuous listening is limited by browser constraints
+- The assistant cannot handle complex or multi-intent queries
+- Voice quality varies depending on the user’s operating system
+- The system does not learn or adapt automatically
 
-- Best experience is on Chrome or Edge
-- Microphone permission is required
-- Voice quality depends on the voices available in the browser/OS
+## Bonus Features
 
-## Future improvements
+- Auto-scroll for new messages
+- Intro screen that hides after first interaction
+- Animated microphone button for better feedback
+- Clear chat button to reset the conversation
 
-- Typing indicator for assistant
-- Better intent confidence scoring
-- Continuous listening mode
-- Context-aware follow-up questions
-- Multi-language support
-
----
-
-Built as a learning project to explore voice interfaces, UI polish, and clean frontend architecture.
+This project focuses on clean UI, clear logic, and a smooth voice-driven user experience.
