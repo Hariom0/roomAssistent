@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Nav from "./component/nav";
+import Nav from "./component/Nav";
 import Chat from "./component/Chat";
 import VoiceBtn from "./component/VoiceBtn";
 
